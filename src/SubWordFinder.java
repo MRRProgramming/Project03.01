@@ -47,9 +47,6 @@ public class SubWordFinder implements WordFinder {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < dictionary.size(); i++) {
-            Collections.sort(dictionary.get(i));
-        }
         for (ArrayList<String> words : dictionary)
             Collections.sort(words);
     }
@@ -122,10 +119,10 @@ public class SubWordFinder implements WordFinder {
         for (SubWord word : subwords) System.out.println(word);
         //app.printDictionary();
         long endTime = System.nanoTime();
-        System.out.println(endTime - startTime);
+        System.out.println("\nThe total time you had to wait was " + (endTime - startTime));
         Scanner in = new Scanner(System.in);
         while (true) {
-            System.out.print("\nDo you want to print words with 3 or 4 sub-words? " +
+            System.out.print("Do you want to print words with 3 or 4 sub-words? " +
                     "\n(3 = 3subs, 4 = 4subs, 5 = 5subs, 0 = no): ");
             String input = in.nextLine().trim();
 
