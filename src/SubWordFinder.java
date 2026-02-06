@@ -96,7 +96,7 @@ public class SubWordFinder implements WordFinder {
             if (bucket.get(mid).equals(word)) {
                 return true;
             }
-            if (word.compareTo(bucket.get(mid)) < 0) {
+            else if (word.compareTo(bucket.get(mid)) < 0) {
                 end = mid - 1;
             } else {
                 start = mid + 1;
