@@ -123,7 +123,7 @@ public class SubWordFinder implements WordFinder {
         Scanner in = new Scanner(System.in);
         while (true) {
             System.out.print("Do you want to print words with 3 or 4 sub-words? " +
-                    "\n(3 = 3subs, 4 = 4subs, 5 = 5subs, 0 = no): ");
+                    "\n(3 = 3subs, 4 = 4subs, 0 = no): ");
             String input = in.nextLine().trim();
 
             if (input.equals("0")) {
