@@ -37,7 +37,7 @@ public class SubWordFinder implements WordFinder {
      */
     public void populateDictionary() {
         try {
-            Scanner in = new Scanner(new File("words_all_os.txt"));
+            Scanner in = new Scanner(new File("new_scrabble.txt"));
             while (in.hasNextLine()) {
                 String temp = in.nextLine();
                 dictionary.get(alpha.indexOf(temp.charAt(0))).add(temp);
@@ -112,18 +112,18 @@ public class SubWordFinder implements WordFinder {
      * @param args command line argument
      */
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
+        //long startTime = System.nanoTime();
         SubWordFinder app = new SubWordFinder();
         ArrayList<SubWord> subwords = app.getSubWords();
         //app.printDictionary();
         for (SubWord word : subwords) System.out.println(word);
         //app.printDictionary();
-        long endTime = System.nanoTime();
-        System.out.println("\nThe total time you had to wait was " + (endTime - startTime));
+        //long endTime = System.nanoTime();
+        //System.out.println("\nThe total time you had to wait was " + (endTime - startTime));
         Scanner in = new Scanner(System.in);
         while (true) {
-            System.out.print("Do you want to print words with 3 or 4 sub-words? " +
-                    "\n(3 = 3subs, 4 = 4subs, 0 = no): ");
+            System.out.print("Do you want to print words with 3, 4, or even 5 sub-words? " +
+                    "\n(3 = 3subs, 4 = 4subs, 5 = 5subs, 0 = no): ");
             String input = in.nextLine().trim();
 
             if (input.equals("0")) {
@@ -175,7 +175,38 @@ public class SubWordFinder implements WordFinder {
                 for (Sub4Word word : sub4Words) {
                     System.out.println(word);
                 }
-            } else {
+            }
+            else if (input.equals("5")) {
+                ArrayList<Sub5Word> sub5Words = new ArrayList<>();
+                for (ArrayList<String> bucket : app.dictionary) {
+                    for (String root : bucket) {
+                        if (root.length() < 10) continue;
+                        for (int i = 2; i < root.length() - 7; i++) {
+                            String word1 = root.substring(0, i);
+                            if (!app.inDictionary(word1)) continue;
+                            for (int j = i + 2; j < root.length() - 5; j++) {
+                                String word2 = root.substring(i, j);
+                                if (!app.inDictionary(word2)) continue;
+                                for (int k = j + 2; k < root.length() - 3; k++) {
+                                    String word3 = root.substring(j, k);
+                                    if (!app.inDictionary(word3)) continue;
+                                    for (int l = k + 2; l < root.length() - 1; l++) {
+                                        String word4 = root.substring(k,l);
+                                        String word5 = root.substring(l);
+                                        if (app.inDictionary(word4) && app.inDictionary(word5)) {
+                                            sub5Words.add(new Sub5Word(root, word1, word2, word3, word4, word5));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (Sub5Word word : sub5Words) {
+                    System.out.println(word);
+                }
+            }
+            else {
                 System.out.println("Invalid input. Please try again.");
                 // Loop continues, asks again
             }

@@ -18,7 +18,7 @@ public class Sub3Word {
     }
 
     /**
-     * Constructs a SubWord object
+     * Constructs a Sub3Word object
      *
      * @param r  the root word
      * @param s1 the front sub
